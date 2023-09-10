@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MensWear Classification</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #0066cc;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #444;
+        }
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            background-color: #0066cc;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #004080;
+        }
+        h2 {
+            margin-top: 20px;
+            color: #0066cc;
+        }
+        p {
+            color: #333;
+        }
+        #uploaded-image {
+            max-width: 50%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Writer Verification</h1>
+    <form method="post" enctype="multipart/form-data">
+        <label for="image">Image (can be of .png, .jpg, .jpeg formats):</label>
+        <input type="file" name="image" accept=".png, .jpg, .jpeg" id="file-input">
+        <br>
+        <input type="submit" value="Verify">
+    </form>
+    <h2>Result:{{result1}}</h2>
+    <!-- Display the uploaded image here -->
+    <img src="#" alt="Uploaded Image" id="uploaded-image">
+    <script>
+        // JavaScript to display the uploaded image
+        document.getElementById("file-input").addEventListener("change", function (event) {
+            const fileInput = event.target;
+            const uploadedImage = document.getElementById("uploaded-image");
+
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    uploadedImage.src = e.target.result;
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                // Clear the image if no file is selected
+                uploadedImage.src = "#";
+            }
+        });
+    </script>
+</body>
+</html>
